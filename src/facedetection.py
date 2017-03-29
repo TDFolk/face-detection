@@ -27,12 +27,20 @@ faces = face_cascade.detectMultiScale(
 
 num = 0
 for (x,y,w,h) in faces:
+    x -= 30
+    y -= 40
+    w += 70
+    h += 70
+    if x < 0:
+        x = 0
+    if y < 0:
+        y = 0
     crop = original_img[y:y+h, x:x+w]
-    cv2.imwrite('crop_face5_' + str(num) + '.jpg', crop)
+    cv2.imwrite('jaycrop5_' + str(num) + '.jpg', crop)
     cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
     num += 1
 
-cv2.imwrite('result_face5.jpg', img)
+cv2.imwrite('bigresult6.jpg', img)
 cv2.waitKey(0)
 
 
