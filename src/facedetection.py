@@ -14,8 +14,10 @@ print(img.size)
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 gray = cv2.equalizeHist(gray)
 
-#histStretch = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
-#gray = histStretch.apply(gray)
+histStretch = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
+gray = histStretch.apply(gray)
+
+#img = cv2.resize(gray, None, fx=2, fy=2, interpolation = cv2.INTER_CUBIC)
 
 faces = face_cascade.detectMultiScale(
     gray,
@@ -36,11 +38,11 @@ for (x,y,w,h) in faces:
     if y < 0:
         y = 0
     crop = original_img[y:y+h, x:x+w]
-    cv2.imwrite('jaycrop5_' + str(num) + '.jpg', crop)
+    cv2.imwrite('perrin_' + str(num) + '.jpg', crop)
     cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
     num += 1
 
-cv2.imwrite('bigresult6.jpg', img)
+cv2.imwrite('perrinresult.jpg', img)
 cv2.waitKey(0)
 
 
